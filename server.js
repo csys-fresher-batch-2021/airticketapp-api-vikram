@@ -13,6 +13,6 @@ app.get('/', (req, res) => console.log('Quintessa trip welcomes you !'));
 
 app.get('/api/flights', FlightController.getAllFlights);
 
-
+app.post('/api/flights/addflight', FlightController.addNewFlight);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

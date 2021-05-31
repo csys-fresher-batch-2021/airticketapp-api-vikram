@@ -15,11 +15,22 @@ class FlightDao {
             console.log(error);
         }
     }
-
-    // static async addNewFlight() {
-    //     let addFlightQuery = 'INSERT INTO flights ( flight_no, airline, flight_date, origin, destiny, depart_time, arrival_time, economy, business, economy_price, business_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
-         
-    // }
+    
+    /**
+     * Function to add a flight to the database.
+     * @param {*} flight 
+     */
+    static async addNewFlight(flight) {
+        let addFlightQuery = 'INSERT INTO flights ( flight_no, airline, flight_date, origin, destiny, depart_time, arrival_time, economy, business, economy_price, business_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
+         pool.query(addFlightQuery, flight, (err, res) =>{
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("Flight added successfully");
+            }
+         });
+    }
 }
 
 module.exports = FlightDao;
