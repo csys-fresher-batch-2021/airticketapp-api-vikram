@@ -15,4 +15,6 @@ app.get('/api/flights', FlightController.getAllFlights);
 
 app.post('/api/flights/addflight', FlightController.addNewFlight);
 
+app.put('/api/flights/updateflight/:id', FlightController.updateFlight);    
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

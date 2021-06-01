@@ -31,6 +31,21 @@ class FlightDao {
             }
          });
     }
+
+    /**
+     * Function to update flight.
+     * @param {*} updatedFlight 
+     */
+    static async updateFlight(updatedFlight){
+        let updateQuery = 'UPDATE flights SET flight_no = $1, airline = $2, flight_date = $3, origin = $4, destiny = $5, depart_time = $6, arrival_time = $7, economy = $8, business = $9, economy_price = $10, business_price = $11 where id = $12';
+        try {
+            const client = await pool.connect();
+            client.query(updateQuery, updatedFlight);
+            console.log("Flight updated successfully");
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }
 
 module.exports = FlightDao;
