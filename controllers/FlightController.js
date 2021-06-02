@@ -1,8 +1,9 @@
 const FlightService = require('../services/FlightService');
 
-class FlightController{
+class FlightController {
+
     // Function that retreives all flights from the database
-    static async getAllFlights(req, res){
+    static async getAllFlights(req, res) {
         let result = await FlightService.getAllFlights();
         res.send(result);
     }
@@ -12,9 +13,17 @@ class FlightController{
      * @param {*} req 
      * @param {*} res 
      */
-    static async addNewFlight(req, res){
-        let result = await FlightService.addNewFlight(req.body);
-        res.send(result);
+    static async addNewFlight(req, res) {
+        try {
+            let status = await FlightService.addNewFlight(req.body);
+            if (status != null) {
+                res.status(200).json({ message: "success" });
+                console.log("Flight added successfully");
+            }
+        }
+        catch (error) {
+            res.status(400).json({ errorMessage: err.message });
+        }
     }
 
     /**
@@ -22,10 +31,21 @@ class FlightController{
      * @param {*} req 
      * @param {*} res 
      */
-    static async updateFlight(req, res){
+    static async updateFlight(req, res) {
         let id = req.params.id;
         await FlightService.updateFlight(id, req.body);
     }
+
+    /**
+     * Controller function to delete flight.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async deleteFlight(req, res) {
+        let id = req.params.id;
+        await FlightService.deleteFlight(id);
+    }
+
 }
 
 module.exports = FlightController;

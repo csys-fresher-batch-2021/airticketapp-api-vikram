@@ -1,10 +1,19 @@
 const FlightDao = require('../dao/FlightDao.js');
 
 class FlightService{
+
     // Function calls show all flights method from the Dao.
     static getAllFlights(){
         return FlightDao.showAllFlights();
     }
+
+    // /**
+    //  * Function to get a details from the Dao.
+    //  * @param {*} id 
+    //  */
+    // static getFlightDetail(id){
+    //     return FlightDao.getFlightDetail(id);
+    // }
 
     /**
      * Function adds the flight array to Flight Dao.
@@ -23,6 +32,15 @@ class FlightService{
     static updateFlight(id, updatedFlight){
         let updatedData = [updatedFlight.no, updatedFlight.airline, updatedFlight.date, updatedFlight.origin, updatedFlight.destiny, updatedFlight.departTime, updatedFlight.arrivalTime, updatedFlight.economy, updatedFlight.business, updatedFlight.economyPrice, updatedFlight.businessPrice, id];
         FlightDao.updateFlight(updatedData);
+    }
+
+    /**
+     * Function to delete the flight data from the database.
+     * @param {*} id 
+     */
+    static deleteFlight(id){
+        let params = [id];
+        FlightDao.deleteFlight(params);
     }
 }
 
