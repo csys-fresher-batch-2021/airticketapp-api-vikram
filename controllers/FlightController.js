@@ -16,6 +16,16 @@ class FlightController{
         let result = await FlightService.addNewFlight(req.body);
         res.send(result);
     }
+
+    /**
+     * Function to update flight.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async updateFlight(req, res){
+        let id = req.params.id;
+        await FlightService.updateFlight(id, req.body);
+    }
 }
 
 module.exports = FlightController;
