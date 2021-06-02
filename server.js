@@ -13,7 +13,7 @@ app.get('/', (req, res) => console.log('Quintessa trip welcomes you !'));
 
 app.get('/api/flights', FlightController.getAllFlights);
 
-// app.get('/api/flights/:id', );
+app.get('/api/flights/:id', FlightController.getFlightById);
 
 app.post('/api/flights/addflight', FlightController.addNewFlight);
 

@@ -7,13 +7,14 @@ class FlightService{
         return FlightDao.showAllFlights();
     }
 
-    // /**
-    //  * Function to get a details from the Dao.
-    //  * @param {*} id 
-    //  */
-    // static getFlightDetail(id){
-    //     return FlightDao.getFlightDetail(id);
-    // }
+    /**
+     * Function to get a details from the Dao.
+     * @param {*} id 
+     */
+    static getFlightDetail(id){
+        let params = [id];
+        return FlightDao.getFlight(params);
+    }
 
     /**
      * Function adds the flight array to Flight Dao.

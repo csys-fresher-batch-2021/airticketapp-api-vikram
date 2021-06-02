@@ -5,7 +5,17 @@ class FlightController {
     // Function that retreives all flights from the database
     static async getAllFlights(req, res) {
         let result = await FlightService.getAllFlights();
-        res.send(result);
+        res.send(result.rows);
+    }
+
+    /**
+     * Funtion to retrieve the flight from the database.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async getFlightById(req, res){
+        let result = await FlightService.getFlightDetail(req.params.id);
+        res.send(result.rows);
     }
 
     /**

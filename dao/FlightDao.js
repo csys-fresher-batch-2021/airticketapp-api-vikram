@@ -10,24 +10,26 @@ class FlightDao {
         try {
             const client = await pool.connect();
             const result = await client.query(flightQuery);
-            console.log(result);
-            return result.rows;
+            return result;
         } catch (error) {
             console.log(error);
         }
     }
 
-    // static async getFlight(id){
-    //     let getFlight = 'SELECT * FROM flights WHERE id = $1';
-    //     try {
-    //         const client = await Pool.connect();
-    //         const result = await client.query(getFlight);
-    //         console.log(result);
-    //         return result.rows;
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
+    /**
+     * Function to retrieve specific row from the flights database.
+     * @param {*} id 
+     */
+    static async getFlight(id){
+        let getFlight = 'SELECT * FROM flights WHERE id = $1';
+        try {
+            const client = await pool.connect();
+            const result = await client.query(getFlight, id);
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+    }
     
     /**
      * Function to add a flight to the database.
