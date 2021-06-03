@@ -28,20 +28,28 @@ class TicketController{
     }
 
     /**
+     * Function to get all tickets booked by user using email.
+     * @param {*} email 
+     */
+    static async getTicketsByEmail(req, res){
+        let email = req.params.email;
+        let result = await TicketService.getTicketsByEmail(email);
+        if(result != null){
+            res.status(200).json(result.rows);
+        } else{
+            res.status(400).json({message: "failed"});
+        }
+    }
+
+    /**
      * Function to delete ticket from the database.
      * @param {*} req 
      * @param {*} res 
      */
     static async cancelTicket(req, res) {
         let id = req.params.id;
-        let result = await TicketService.deleteTicket(id);
-        if(result != null){
-            res.status(200).json({message:"success"});
-            console.log('Ticket cancelled successfully');
-        }
-        else{
-            res.status(400).json({errorMessage: err.message});
-        }
+        await TicketService.deleteTicket(id);
+        res.send("Ticket Cancelled successfully");
     }
 }
 
