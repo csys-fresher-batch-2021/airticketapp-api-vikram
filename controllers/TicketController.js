@@ -20,7 +20,7 @@ class TicketController{
         let result = await TicketService.saveTicket(req.body);
         if(result != null) {
             res.status(200).json({message:"success"});
-            console.log('Ticket saved successfully');
+            console.log('Ticket booked successfully');
         }
         else{
             res.status(400).json({errorMessage: err.message});
