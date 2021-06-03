@@ -12,7 +12,7 @@ class TicketDao{
             const result = await client.query(getQuery);
             return result;
         } catch (error) {
-            console.error(error);
+            console.log(error);
         }
     }
 
@@ -27,8 +27,23 @@ class TicketDao{
             const result = await client.query(addQuery, ticket);
             return result;
         } catch (error) {
-            console.error(error);
+            console.log(error);
         } 
+    }
+
+    /**
+     * Function to retrieve booked ticket based on email.
+     * @param {*} email 
+     */
+    static async getTicketByEmail(email){
+        let selectQuery = 'SELECT * FROM ticket WHERE email = $1';
+        try{
+            const client = await pool.connect();
+            const result = await client.query(selectQuery, email);
+            return result;
+        }catch(error){
+            console.log(error);
+        }
     }
 
     /**

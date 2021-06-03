@@ -19,6 +19,15 @@ class TicketService{
     }
 
     /**
+     * Function to get all tickets booked by user using email.
+     * @param {*} email 
+     */
+    static getTicketsByEmail(email){
+        let params = [email];
+        return TicketDao.getTicketByEmail(params);
+    }
+
+    /**
      * Function to delete ticket from the database.
      * @param {*} id 
      */
