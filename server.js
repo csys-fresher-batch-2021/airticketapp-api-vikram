@@ -26,4 +26,8 @@ app.delete('/api/flights/deleteflight/:id', FlightController.deleteFlight);
 // Routes for tickets.
 app.get('/api/tickets', TicketController.displayTickets);
 
+app.post('/api/tickets/bookticket', TicketController.storeFlightTicket);
+
+app.delete('/api/tickets/cancelTicket/:id', TicketController.cancelTicket);
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

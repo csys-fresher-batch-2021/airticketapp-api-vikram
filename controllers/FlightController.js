@@ -27,7 +27,7 @@ class FlightController {
         try {
             let status = await FlightService.addNewFlight(req.body);
             if (status != null) {
-                res.status(200).json({ message: "success" });
+                res.status(200).json({message: "success"});
                 console.log("Flight added successfully");
             }
         }
