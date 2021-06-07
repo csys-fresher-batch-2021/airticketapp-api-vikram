@@ -1,4 +1,8 @@
+const Joi = require('joi');
+
 const FlightDao = require('../dao/FlightDao.js');
+const { schema } = require('../helpers/FlightValidator.js');
+
 
 class FlightService{
 
@@ -12,8 +16,7 @@ class FlightService{
      * @param {*} id 
      */
     static getFlightDetail(id){
-        let params = [id];
-        return FlightDao.getFlight(params);
+        return FlightDao.getFlight(id);
     }
 
     /**
@@ -21,8 +24,13 @@ class FlightService{
      * @param {*} flight 
      */
     static addNewFlight(flight){
-        let flightData = [flight.no, flight.airline, flight.date, flight.origin, flight.destiny, flight.departTime, flight.arrivalTime, flight.economy, flight.business, flight.economyPrice, flight.businessPrice];
-        FlightDao.addNewFlight(flightData);
+        const result = schema.validate(flight);
+        if(result.error != null){
+            throw new Error(result.error);
+        }
+        else{
+            return FlightDao.addNewFlight(flight);
+        }
     }
 
     /**
@@ -31,8 +39,13 @@ class FlightService{
      * @param {*} updatedFlight 
      */
     static updateFlight(id, updatedFlight){
-        let updatedData = [updatedFlight.no, updatedFlight.airline, updatedFlight.date, updatedFlight.origin, updatedFlight.destiny, updatedFlight.departTime, updatedFlight.arrivalTime, updatedFlight.economy, updatedFlight.business, updatedFlight.economyPrice, updatedFlight.businessPrice, id];
-        FlightDao.updateFlight(updatedData);
+        const result = schema.validate(updatedFlight);
+        if(result.error != null){
+            throw new Error(result.error);
+        }
+        else{
+            return FlightDao.updateFlight(id, updatedFlight);
+        }
     }
 
     /**
@@ -40,8 +53,7 @@ class FlightService{
      * @param {*} id 
      */
     static deleteFlight(id){
-        let params = [id];
-        FlightDao.deleteFlight(params);
+        return FlightDao.deleteFlight(id);
     }
 }
 
