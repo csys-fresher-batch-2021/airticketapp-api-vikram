@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const FlightDao = require('../dao/FlightDao.js');
-const { schema } = require('../helpers/FlightValidator.js');
+const flightValidator = require('../helpers/FlightValidator.js');
 
 
 class FlightService{
@@ -24,7 +24,7 @@ class FlightService{
      * @param {*} flight 
      */
     static addNewFlight(flight){
-        const result = schema.validate(flight);
+        const result = flightValidator.flightSchema().validate(flight);
         if(result.error != null){
             throw new Error(result.error);
         }
@@ -39,7 +39,7 @@ class FlightService{
      * @param {*} updatedFlight 
      */
     static updateFlight(id, updatedFlight){
-        const result = schema.validate(updatedFlight);
+        const result = flightValidator.flightSchema().validate(updatedFlight);
         if(result.error != null){
             throw new Error(result.error);
         }

@@ -1,4 +1,5 @@
 const TicketDao = require('../dao/TicketDao.js');
+const ticketValidator = require('../helpers/TicketValidator.js');
 
 class TicketService{
 
@@ -14,8 +15,13 @@ class TicketService{
      * @param {*} ticket 
      */
     static saveTicket(ticket){
-        let ticketData = [ticket.no, ticket.flightId, ticket.email, ticket.origin, ticket.destiny, ticket.depart, ticket.arrival, ticket.price, ticket.status];
-        return TicketDao.storeTicket(ticketData);
+        const result = ticketValidator.ticketSchema().validate(ticket);
+        if(result.error != null){
+            throw new Error(result.error);
+        }
+        else{
+            return TicketDao.storeTicket(ticket);
+        }
     }
 
     /**
@@ -23,8 +29,7 @@ class TicketService{
      * @param {*} email 
      */
     static getTicketsByEmail(email){
-        let params = [email];
-        return TicketDao.getTicketByEmail(params);
+        return TicketDao.getTicketByEmail(email);
     }
 
     /**
@@ -32,8 +37,7 @@ class TicketService{
      * @param {*} id 
      */
     static deleteTicket(id){
-        let params = [id];
-        return TicketDao.cancelTicket(params);
+        return TicketDao.cancelTicket(id);
     }
 }
 

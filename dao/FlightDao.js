@@ -10,6 +10,7 @@ class FlightDao {
         try {
             const client = await pool.connect();
             const result = await client.query(flightQuery);
+            client.release();
             return result;
         } catch (error) {
             console.log(error);
@@ -26,6 +27,7 @@ class FlightDao {
         try {
             const client = await pool.connect();
             const result = await client.query(getFlight, params);
+            client.release();
             return result;
         } catch (err) {
             console.log(err);
@@ -39,8 +41,14 @@ class FlightDao {
     static async addNewFlight(flight) {
         let flightData = [flight.no, flight.airline, flight.date, flight.origin, flight.destiny, flight.departTime, flight.arrivalTime, flight.economy, flight.business, flight.economyPrice, flight.businessPrice];
         let addFlightQuery = 'INSERT INTO flights ( flight_no, airline, flight_date, origin, destiny, depart_time, arrival_time, economy, business, economy_price, business_price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)';
-        let result = await pool.query(addFlightQuery, flightData);
-        return result;
+        try {
+            const client = await pool.connect();
+            const result = await client.query(addFlightQuery, flightData);
+            client.release();
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     /**
@@ -53,6 +61,7 @@ class FlightDao {
         try {
             const client = await pool.connect();
             const result = await client.query(updateQuery, params);
+            client.release();
             return result;
         } catch (err) {
             console.log(err);
@@ -69,6 +78,7 @@ class FlightDao {
         try {
             const client = await pool.connect();
             const result = await client.query(deleteQuery, params);
+            client.release();
             return result;
         } catch (error) {
             console.log(error);
