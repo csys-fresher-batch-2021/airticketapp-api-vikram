@@ -32,7 +32,7 @@ class TicketController{
      * @param {*} email 
      */
     static async getTicketsByEmail(req, res){
-        let email = req.params.email;
+        let email = req.query.email;
         let result = await TicketService.getTicketsByEmail(email);
         if(result != null){
             res.status(200).json(result.rows);

@@ -18,19 +18,19 @@ app.get('/api/flights', FlightController.getAllFlights);
 
 app.get('/api/flights/:id', FlightController.getFlightById);
 
-app.post('/api/flights/addflight', FlightController.addNewFlight);
+app.post('/api/flights', FlightController.addNewFlight);
 
-app.put('/api/flights/updateflight/:id', FlightController.updateFlight);
+app.put('/api/flights/:id', FlightController.updateFlight);
 
-app.delete('/api/flights/deleteflight/:id', FlightController.deleteFlight);
+app.delete('/api/flights/:id', FlightController.deleteFlight);
 
 // Routes for tickets.
 app.get('/api/tickets', TicketController.displayTickets);
 
-app.get('/api/tickets/:email', TicketController.getTicketsByEmail);
+app.get('/api/tickets', TicketController.getTicketsByEmail);
 
-app.post('/api/tickets/bookticket', TicketController.storeFlightTicket);
+app.post('/api/tickets', TicketController.storeFlightTicket);
 
-app.delete('/api/tickets/cancelticket/:id', TicketController.cancelTicket);
+app.patch('/api/tickets/:id/cancel', TicketController.cancelTicket);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

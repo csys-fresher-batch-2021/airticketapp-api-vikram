@@ -13,7 +13,7 @@ class FlightController {
      * @param {*} req 
      * @param {*} res 
      */
-    static async getFlightById(req, res){
+    static async getFlightById(req, res) {
         let result = await FlightService.getFlightDetail(req.params.id);
         res.send(result.rows);
     }
@@ -27,12 +27,12 @@ class FlightController {
         try {
             let status = await FlightService.addNewFlight(req.body);
             if (status != null) {
-                res.status(200).json({message: "success"});
                 console.log("Flight added successfully");
+                res.status(200).json({ message: "success" });
             }
         }
         catch (error) {
-            res.status(400).json({ errorMessage: err.message });
+            res.status(400).send(error.message);
         }
     }
 
@@ -42,8 +42,17 @@ class FlightController {
      * @param {*} res 
      */
     static async updateFlight(req, res) {
-        let id = req.params.id;
-        await FlightService.updateFlight(id, req.body);
+        try {
+            const id = req.params.id;
+            let status = await FlightService.updateFlight(id, req.body);
+            console.log(status);
+            if (status != null) {
+                console.log("Flight updated successfully");
+                res.status(200).json({ message: "success" });
+            }
+        } catch (error) {
+            res.status(400).send(error.message);
+        }
     }
 
     /**
@@ -52,10 +61,18 @@ class FlightController {
      * @param {*} res 
      */
     static async deleteFlight(req, res) {
-        let id = req.params.id;
-        await FlightService.deleteFlight(id);
+        try {
+            let id = req.params.id;
+            const status = await FlightService.deleteFlight(id);
+            if (status != null) {
+                console.log("Deleted successfully");
+                res.status(200).json({ message: "success" });
+            }
+        }
+        catch (error) {
+            res.status(400).send(error.message);
+        }
     }
-
 }
 
 module.exports = FlightController;
