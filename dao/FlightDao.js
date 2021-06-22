@@ -18,6 +18,23 @@ class FlightDao {
     }
 
     /**
+     * Function to return flights data based on filter.
+     * @param {*} flights 
+     */
+    static async getAllFlightsByFilter(flights){
+        let params = [flights.date, flights.origin, flights.destiny];
+        let flightQuery = 'select * from flights where flight_date = $1 AND origin = $2 AND destiny = $3';
+        try {
+            const client = await pool.connect();
+            const result = await client.query(flightQuery, params);
+            client.release();
+            return result;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    /**
      * Function to retrieve specific row from the flights database.
      * @param {*} id 
      */
