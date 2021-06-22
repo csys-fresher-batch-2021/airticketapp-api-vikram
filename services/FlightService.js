@@ -20,6 +20,14 @@ class FlightService{
     }
 
     /**
+     * Function to get flight details by search filter.
+     * @param {*} flights 
+     */
+    static getFlightsByFilter(flights){
+        return FlightDao.getAllFlightsByFilter(flights);
+    }
+
+    /**
      * Function adds the flight array to Flight Dao.
      * @param {*} flight 
      */

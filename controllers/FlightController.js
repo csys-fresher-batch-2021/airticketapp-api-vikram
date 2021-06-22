@@ -19,6 +19,16 @@ class FlightController {
     }
 
     /**
+     * Function to retreive flight by search filter.
+     * @param {*} req 
+     * @param {*} res 
+     */
+    static async getByFlightsByFilter(req, res){
+        let result = await FlightService.getFlightsByFilter(req.body);
+        res.send(result.rows);
+    }
+
+    /**
      * Function to add flight to the database.
      * @param {*} req 
      * @param {*} res 

@@ -22,8 +22,8 @@ class TicketDao{
      * @param {*} ticket 
      */
     static async storeTicket(ticket){
-        let ticketData = [ticket.no, ticket.flightId, ticket.email, ticket.origin, ticket.destiny, ticket.depart, ticket.arrival, ticket.price, ticket.status];
-        let addQuery = 'insert into ticket (ticket_no, flight_no, email, origin, destiny, depart_time, arrival_time, price, status, booked_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, current_timestamp)';
+        let ticketData = [ticket.no, ticket.airline, ticket.date, ticket.origin, ticket.destiny, ticket.depart, ticket.arrival, ticket.seatType, ticket.noOfTickets, ticket.adult, ticket.children, ticket.infant, ticket.price];
+        let addQuery = 'insert into ticket (flight_no, airline, flight_date, origin, destiny, depart_time, arrival_time, seat_type, no_of_tickets, adult, children, infant, price, booked_time) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, current_timestamp)';
         try {
             const client = await pool.connect();
             const result = await client.query(addQuery, ticketData);
