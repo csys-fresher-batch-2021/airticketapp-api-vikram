@@ -3,6 +3,7 @@ const cors = require("cors");
 
 const FlightController = require('./controllers/FlightController.js');
 const TicketController = require('./controllers/TicketController.js');
+const PaymentController = require('./controllers/PaymentController.js');
 
 require("dotenv").config();
 
@@ -34,5 +35,10 @@ app.get('/api/v1/tickets', TicketController.displayTickets);
 app.post('/api/v1/tickets', TicketController.storeFlightTicket);
 
 app.patch('/api/v1/tickets/:id/cancel', TicketController.cancelTicket);
+
+// Routes for payment.
+app.get('/api/v1/card', PaymentController.getAllCardDetails);
+
+app.post('/api/v1/card', PaymentController.storeCardDetails);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

@@ -31,3 +31,13 @@ create table ticket (
 	booked_time timestamp,
 	primary key(id, ticket_no)
 );
+
+create table card_payment (
+	id serial not null,
+	card_name varchar(30) not null,
+	card_no int not null,
+	expiry_month int not null,
+	expiry_year int not null,
+	paid_time timestamp,
+	primary key(id)
+);
