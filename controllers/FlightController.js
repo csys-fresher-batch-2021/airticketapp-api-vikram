@@ -15,7 +15,7 @@ class FlightController {
      */
     static async getFlightById(req, res) {
         let result = await FlightService.getFlightDetail(req.params.id);
-        res.send(result.rows);
+        res.send(result.rows[0]);
     }
 
     /**
