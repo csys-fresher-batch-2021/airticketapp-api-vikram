@@ -9,7 +9,6 @@ const PaymentController = require('./controllers/PaymentController.js');
 const UserController = require('./controllers/UserController.js');
 const AdminController = require('./controllers/AdminController.js');
 const { TransactController } = require('./controllers/TransactController.js');
-const transactController = new TransactController();
 const Authentication = require('./middlewares/Authentication.js');
 
 require("dotenv").config();
@@ -17,7 +16,7 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-
+const transactController = new TransactController();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => console.log('Quintessa trip welcomes you !'));
