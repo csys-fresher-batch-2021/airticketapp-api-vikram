@@ -11,13 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "@joi/date": "^2.1.0",
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^5.0.0-alpha.8",
     "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.12"
   }
 }
