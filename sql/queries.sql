@@ -41,3 +41,12 @@ create table card_payment (
 	paid_time timestamp,
 	primary key(id)
 );
+
+create table signup (
+	id serial primary key,
+	name varchar(30) not null,
+	email varchar(30) not null,
+	mobileNo bigint not null,
+	username varchar(30) not null,
+	password varchar(30) not null
+);
